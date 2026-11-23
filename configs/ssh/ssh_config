@@ -1,0 +1,10 @@
+# ~/.ssh/config (on admin MacBook)
+Host vpn-gw
+    HostName <VPN_GW_OUTER_IP>
+    User <ADMIN_SSH_USER>
+
+Host gitlab-private
+    HostName 172.28.10.10
+    User <ADMIN_SSH_USER>
+    ProxyJump vpn-gw
+    LocalForward 9090 127.0.0.1:9090

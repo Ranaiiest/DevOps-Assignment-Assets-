@@ -1,0 +1,36 @@
+# .gitlab-ci.yml (in company/team-web/web-app)
+stages:
+  - lint
+  - test
+  - build
+  - secret_scan
+
+lint_job:
+  stage: lint
+  image: alpine:latest
+  script:
+    - echo "Checking shell syntax..."
+    - sh -n app.sh
+
+test_job:
+  stage: test
+  image: alpine:latest
+  script:
+    - echo "Running app..."
+    - ./app.sh | grep -q "Running cleanly"
+
+build_job:
+  stage: build
+  image: alpine:latest
+  script:
+    - echo "Building artifact..."
+    - echo "Using protected deploy key -> $DEPLOY_API_KEY"
+    - mkdir -p dist && cp app.sh dist/
+
+gitleaks_scan:
+  stage: secret_scan
+  image:
+    name: zricethezav/gitleaks:latest
+    entrypoint: [""]
+  script:
+    - gitleaks detect --source . -v

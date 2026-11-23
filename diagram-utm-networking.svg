@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 320" width="860" height="320" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="860" height="320" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- Title -->
+  <text x="430" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">UTM Virtual NICs, Cables &amp; Switches Explained</text>
+
+  <!-- Top: Mac Host / Internet -->
+  <rect x="290" y="52" width="280" height="44" rx="22" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+  <text x="430" y="72" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">Mac Host (192.168.64.1) + Internet</text>
+  <text x="430" y="87" text-anchor="middle" font-size="10" fill="#475569">Connected via UTM bridge100 NAT</text>
+
+  <line x1="430" y1="96" x2="430" y2="122" stroke="#64748b" stroke-width="2"/>
+  <polygon points="425,120 430,129 435,120" fill="#64748b"/>
+
+  <!-- Switch 1: Shared Network -->
+  <rect x="60" y="130" width="330" height="62" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
+  <text x="225" y="153" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">Switch 1: Shared Network</text>
+  <text x="225" y="171" text-anchor="middle" font-size="11" fill="#1d4ed8">192.168.64.0/24 (Has DHCP + Internet)</text>
+
+  <!-- Switch 2: Host Only -->
+  <rect x="470" y="130" width="330" height="62" rx="10" fill="#d1fae5" stroke="#059669" stroke-width="1.8"/>
+  <text x="635" y="153" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">Switch 2: Host Only</text>
+  <text x="635" y="171" text-anchor="middle" font-size="11" fill="#047857">172.28.10.0/24 (Isolated — No Internet)</text>
+
+  <!-- Virtual Cables -->
+  <line x1="140" y1="192" x2="140" y2="232" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="92" y="216" text-anchor="middle" font-size="10" fill="#1d4ed8">Cable 1</text>
+
+  <line x1="330" y1="192" x2="365" y2="232" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="322" y="216" text-anchor="middle" font-size="10" fill="#1d4ed8">Cable 2</text>
+
+  <line x1="530" y1="192" x2="495" y2="232" stroke="#059669" stroke-width="2.5"/>
+  <text x="538" y="216" text-anchor="middle" font-size="10" fill="#047857">Cable 3</text>
+
+  <line x1="720" y1="192" x2="720" y2="232" stroke="#059669" stroke-width="2.5"/>
+  <text x="768" y="216" text-anchor="middle" font-size="10" fill="#047857">Cable 4</text>
+
+  <!-- Bottom: 3 VMs -->
+  <rect x="40" y="232" width="200" height="68" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+  <text x="140" y="255" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">client VM</text>
+  <text x="140" y="274" text-anchor="middle" font-size="11" fill="#334155">NIC1 (enp0s1): 192.168.64.3</text>
+  <text x="140" y="290" text-anchor="middle" font-size="10" fill="#64748b">1 Virtual Cable (Outside)</text>
+
+  <rect x="315" y="232" width="230" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="430" y="253" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">vpn-gw VM (Bridge)</text>
+  <text x="430" y="271" text-anchor="middle" font-size="10.5" fill="#1d4ed8">NIC1 (enp0s1): 192.168.64.2</text>
+  <text x="430" y="287" text-anchor="middle" font-size="10.5" fill="#047857">NIC2 (enp0s2): 172.28.10.1</text>
+
+  <rect x="620" y="232" width="200" height="68" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.8"/>
+  <text x="720" y="255" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">gitlab VM</text>
+  <text x="720" y="274" text-anchor="middle" font-size="11" fill="#047857">NIC1 (enp0s1): 172.28.10.10</text>
+  <text x="720" y="290" text-anchor="middle" font-size="10" fill="#64748b">1 Virtual Cable (Private Only)</text>
+</svg>

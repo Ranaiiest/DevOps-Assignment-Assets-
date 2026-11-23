@@ -1,0 +1,10 @@
+# /etc/netplan/60-private.yaml (on gitlab — enp0s1 Host Only private NIC)
+network:
+  version: 2
+  ethernets:
+    enp0s1:
+      addresses:
+        - 172.28.10.10/24
+      routes:
+        - to: default
+          via: 172.28.10.1

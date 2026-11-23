@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 340" width="920" height="340" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="920" height="340" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- Title -->
+  <text x="460" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Private GitLab Architecture: Network, WireGuard VPN &amp; Firewall Flow</text>
+
+  <!-- Zone 1: Outer / Shared Network -->
+  <rect x="24" y="54" width="230" height="258" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="139" y="76" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">OUTER / SHARED NETWORK</text>
+  <text x="139" y="92" text-anchor="middle" font-size="11" fill="#64748b">192.168.64.0/24 (Mac: .1)</text>
+
+  <rect x="40" y="112" width="198" height="176" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+  <text x="139" y="136" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">client VM</text>
+  <text x="139" y="154" text-anchor="middle" font-size="11" fill="#334155">enp0s1: 192.168.64.3</text>
+  <line x1="56" y1="166" x2="222" y2="166" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="139" y="184" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">3 Separate VPN Profiles:</text>
+  <text x="139" y="204" text-anchor="middle" font-size="11" fill="#0369a1">dev1 &#8594; 172.28.20.2</text>
+  <text x="139" y="222" text-anchor="middle" font-size="11" fill="#0369a1">dev2 &#8594; 172.28.20.3</text>
+  <text x="139" y="240" text-anchor="middle" font-size="11" fill="#7c2d12">admin &#8594; 172.28.20.10</text>
+  <text x="139" y="268" text-anchor="middle" font-size="10" fill="#64748b">Split Tunnel (172.28.10.0/24, .20.0/24)</text>
+
+  <!-- Arrow 1: Client -> vpn-gw -->
+  <line x1="238" y1="186" x2="338" y2="186" stroke="#2563eb" stroke-width="2.5"/>
+  <polygon points="338,180 350,186 338,192" fill="#2563eb"/>
+  <rect x="248" y="156" width="90" height="22" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="293" y="171" text-anchor="middle" font-size="10" font-weight="600" fill="#1d4ed8">UDP 51820</text>
+  <text x="293" y="203" text-anchor="middle" font-size="10" fill="#1e40af">WireGuard</text>
+
+  <!-- Zone 2: vpn-gw -->
+  <rect x="350" y="54" width="244" height="258" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="472" y="76" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">vpn-gw (Gateway + Bastion)</text>
+  <text x="472" y="93" text-anchor="middle" font-size="11" fill="#1d4ed8">enp0s1: 192.168.64.2</text>
+
+  <rect x="368" y="108" width="208" height="58" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="472" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">1. wg0 (VPN Booth)</text>
+  <text x="472" y="145" text-anchor="middle" font-size="11" fill="#334155">172.28.20.1/24 (Decrypts &amp; Auth)</text>
+
+  <line x1="472" y1="166" x2="472" y2="182" stroke="#2563eb" stroke-width="2"/>
+  <polygon points="467,180 472,189 477,180" fill="#2563eb"/>
+
+  <rect x="368" y="190" width="208" height="66" rx="8" fill="#ffffff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="472" y="210" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">2. UFW Firewall + IP Forward</text>
+  <text x="472" y="227" text-anchor="middle" font-size="10.5" fill="#334155">Devs: ONLY gitlab 443 &amp; 22</text>
+  <text x="472" y="243" text-anchor="middle" font-size="10.5" fill="#7c2d12">Admin: + Server SSH &amp; ProxyJump</text>
+
+  <text x="472" y="286" text-anchor="middle" font-size="11" font-weight="600" fill="#1e3a8a">enp0s2 (Back Door): 172.28.10.1/24</text>
+
+  <!-- Arrow 2: vpn-gw -> gitlab -->
+  <line x1="594" y1="222" x2="672" y2="222" stroke="#059669" stroke-width="2.5"/>
+  <polygon points="672,216 684,222 672,228" fill="#059669"/>
+  <rect x="598" y="192" width="76" height="22" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="1"/>
+  <text x="636" y="207" text-anchor="middle" font-size="10" font-weight="600" fill="#065f46">443 &amp; 22</text>
+  <text x="636" y="239" text-anchor="middle" font-size="10" fill="#065f46">Host Only</text>
+
+  <!-- Zone 3: Private Subnet -->
+  <rect x="684" y="54" width="212" height="258" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.8"/>
+  <text x="790" y="76" text-anchor="middle" font-size="12" font-weight="700" fill="#065f46">PRIVATE SUBNET (HOST ONLY)</text>
+  <text x="790" y="92" text-anchor="middle" font-size="11" fill="#047857">172.28.10.0/24 — Zero Internet</text>
+
+  <rect x="700" y="112" width="180" height="176" rx="8" fill="#ffffff" stroke="#10b981" stroke-width="1.5"/>
+  <text x="790" y="136" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">gitlab VM</text>
+  <text x="790" y="154" text-anchor="middle" font-size="11" fill="#334155">enp0s1: 172.28.10.10</text>
+  <line x1="716" y1="166" x2="864" y2="166" stroke="#d1fae5" stroke-width="1.5"/>
+  <text x="790" y="186" text-anchor="middle" font-size="11" font-weight="600" fill="#065f46">GitLab CE Omnibus</text>
+  <text x="790" y="204" text-anchor="middle" font-size="10.5" fill="#334155">HTTPS (443) + Git SSH (22)</text>
+  <text x="790" y="226" text-anchor="middle" font-size="11" font-weight="600" fill="#065f46">Docker + Runner</text>
+  <text x="790" y="244" text-anchor="middle" font-size="10.5" fill="#334155">alpine + gitleaks cached</text>
+  <text x="790" y="268" text-anchor="middle" font-size="10" fill="#64748b">Localhost: 127.0.0.1 (Prometheus)</text>
+</svg>

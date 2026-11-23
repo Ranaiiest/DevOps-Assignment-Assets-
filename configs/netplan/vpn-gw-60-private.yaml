@@ -1,0 +1,7 @@
+# /etc/netplan/60-private.yaml (on vpn-gw — enp0s2 Host Only private NIC)
+network:
+  version: 2
+  ethernets:
+    enp0s2:
+      addresses:
+        - 172.28.10.1/24
