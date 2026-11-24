@@ -4,6 +4,8 @@ A scaled-down, private self-hosted GitLab CE setup running on isolated local VMs
 
 ![End-to-End Architecture](diagram-architecture.svg)
 
+
+[Video Walkthrough & Demo Explanation](https://drive.google.com/file/d/1PS0r06fCJqIOedKuHD5X_1IVEp05eHYV/view)
 ---
 
 ## Repository Contents
